@@ -22,15 +22,13 @@ int main() {
 	int sum = 0;
 	int count = 0;
 	
-	for (i = 0; fish[i] != -9999 && i < 25; i++) {
-		sum += fish[i];
-		count++;
-	}
-	
 	char longStr[256] = "";
 	char buffer[16];
 	
-	for (i = 0; fish[i] != -9999 && i < 25 ; i++) {
+	for (i = 0; fish[i] != -9999 && i < 25; i++) {
+		sum += fish[i];
+		count++;
+		
 		strcat(longStr, itoa(fish[i], buffer, 10));
 	}
 	
@@ -40,6 +38,7 @@ int main() {
 	}
 	
 	printf( "Numbers sum to %d and average to about %.2f\n", sum, (double)sum/count );
-	printf( "I can shove them into the string %s that contains %d 7s", longStr, sevenCount );
+	printf( "I can shove them into a string %s that contains %d 7%s",
+		longStr, sevenCount, sevenCount == 1 ? "" : "s");
 	
 }
