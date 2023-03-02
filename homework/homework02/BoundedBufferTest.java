@@ -15,20 +15,71 @@ import static org.junit.Assert.assertEquals;
  */
 public class BoundedBufferTest {
     BoundedBuffer boundedBuffer = new BoundedBuffer();
+    Thread t1 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                int count = 0;
+                while(boundedBuffer.numOccupied < 5) {
+                    boundedBuffer.insert(count);
+                    System.out.println("thread t1 inserting " + count);
+                    count++;
+                }
+            }catch(Exception e) {
+                System.out.println("error in t1 " + e.getMessage());
+            }
+           
+        }
+    });
+    Thread t2 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                int count = 5;
+                while(boundedBuffer.numOccupied < 5) {
+                    boundedBuffer.insert(count);
+                    System.out.println("thread t2 inserting " + count);
+                    count++;
+                }
+            }catch(Exception e) {
+                System.out.println("error in t2 " + e.getMessage());
+            }
+        }
+    });
+    Thread t3 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                while(boundedBuffer.numOccupied < 5) {
+                    int retrieved = (int)boundedBuffer.retrieve();
+                    System.out.println("thread t3  retrieved: " + retrieved);
+                }
+            }catch(Exception e) {
+                System.out.println("error in t3 " + e.getMessage());
+            }
+        }
+    });
+    Thread t4 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                while(boundedBuffer.numOccupied < 5) {
+                    int retrieved = (int)boundedBuffer.retrieve();
+                    System.out.println("thread t4  retrieved: " + retrieved);
+                }
+            }catch(Exception e) {
+                System.out.println("error in t4 " + e.getMessage());
+            }
+        }
+    });  
+
     
     @Test
     public void test1() {
         assertEquals(1, 1 + 0);
-        int count = 0;
-        while(count < 20) {
-            try {
-                boundedBuffer.insert(count);
-                Object retrieved = boundedBuffer.retrieve();
-                System.out.println("retrived " + retrieved.toString());
-            }catch(Exception e) {
-                System.out.println("error occured " + e.getMessage());
-            }
-            count++;
-        }
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
     }
 }

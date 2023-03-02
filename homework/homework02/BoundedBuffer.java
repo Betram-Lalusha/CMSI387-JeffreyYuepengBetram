@@ -1,8 +1,8 @@
 package homework.homework02;
 
 public class BoundedBuffer {
-  private Object[] buffer = new Object[20]; // arbitrary size
-  private int numOccupied = 0;
+  public Object[] buffer = new Object[11]; // arbitrary size
+  public int numOccupied = 0;
   private int firstOccupied = 0;
   /* invariant: 0 <= numOccupied <= buffer.length
      0 <= firstOccupied < buffer.length
@@ -27,7 +27,6 @@ public class BoundedBuffer {
       // wait for data
       wait();
     Object retrieved = buffer[firstOccupied];
-    System.out.println("retrieving at " + firstOccupied);
     buffer[firstOccupied] = null; // may help garbage collector
     firstOccupied = (firstOccupied + 1) % buffer.length;
     numOccupied--;
