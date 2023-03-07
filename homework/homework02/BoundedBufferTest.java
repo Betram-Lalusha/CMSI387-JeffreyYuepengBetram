@@ -15,71 +15,77 @@ import static org.junit.Assert.assertEquals;
  */
 public class BoundedBufferTest {
     BoundedBuffer boundedBuffer = new BoundedBuffer();
-    Thread t1 = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                int count = 0;
-                while(boundedBuffer.numOccupied < 5) {
-                    boundedBuffer.insert(count);
-                    System.out.println("thread t1 inserting " + count);
-                    count++;
-                }
-            }catch(Exception e) {
-                System.out.println("error in t1 " + e.getMessage());
-            }
-           
-        }
-    });
-    Thread t2 = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                int count = 5;
-                while(boundedBuffer.numOccupied < 5) {
-                    boundedBuffer.insert(count);
-                    System.out.println("thread t2 inserting " + count);
-                    count++;
-                }
-            }catch(Exception e) {
-                System.out.println("error in t2 " + e.getMessage());
-            }
-        }
-    });
-    Thread t3 = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                while(boundedBuffer.numOccupied < 5) {
-                    int retrieved = (int)boundedBuffer.retrieve();
-                    System.out.println("thread t3  retrieved: " + retrieved);
-                }
-            }catch(Exception e) {
-                System.out.println("error in t3 " + e.getMessage());
-            }
-        }
-    });
-    Thread t4 = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                while(boundedBuffer.numOccupied < 5) {
-                    int retrieved = (int)boundedBuffer.retrieve();
-                    System.out.println("thread t4  retrieved: " + retrieved);
-                }
-            }catch(Exception e) {
-                System.out.println("error in t4 " + e.getMessage());
-            }
-        }
-    });  
+    BoundedBufferForQuestion4 boundedBufferForQuestion4 = new BoundedBufferForQuestion4();
 
-    
+    /**
+     * tests the bounded buffer class that calls notify all after insertion and
+     * retrieval
+     */
     @Test
     public void test1() {
-        assertEquals(1, 1 + 0);
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
+        Thread producer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for (int i = 0; i < 20; i++) {
+                        boundedBuffer.insert(i);
+                    }
+                }catch(Exception e) {
+                    System.out.println("error in producer: " + e.getMessage());
+                }
+               
+            }
+        });
+        Thread consumer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for(int i = 0; i < 20; i++) {
+                        Object retrieved = boundedBuffer.retrieve();
+                        assertEquals(retrieved, i);
+                    }
+                }catch(Exception e) {
+                    System.out.println("error in consumer: " + e.getMessage());
+                }
+            }
+        }); 
+        consumer.start();
+        producer.start();
+    }
+
+    /**
+     * tests the bounded buffer that only calls notifyAll() when insterting into an empty buffer
+     * or retrieving from a full buffer
+     */
+    @Test
+    public void test2() {
+        Thread producer2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for (int i = 0; i < 20; i++) {
+                        boundedBufferForQuestion4.insert(i);
+                    }
+                }catch(Exception e) {
+                    System.out.println("error in producer: " + e.getMessage());
+                }
+               
+            }
+        });
+        Thread consumer2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for(int i = 0; i < 20; i++) {
+                        Object retrieved = boundedBufferForQuestion4.retrieve();
+                        assertEquals(retrieved, i);
+                    }
+                }catch(Exception e) {
+                    System.out.println("error in consumer: " + e.getMessage());
+                }
+            }
+        }); 
+        consumer2.start();
+        producer2.start();
     }
 }

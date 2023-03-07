@@ -1,7 +1,7 @@
 package homework.homework02;
 
-public class BoundedBuffer {
-  public Object[] buffer = new Object[11]; // arbitrary size
+public class BoundedBufferForQuestion4 {
+    public Object[] buffer = new Object[11]; // arbitrary size
   public int numOccupied = 0;
   private int firstOccupied = 0;
   /* invariant: 0 <= numOccupied <= buffer.length
@@ -19,8 +19,8 @@ public class BoundedBuffer {
 
     buffer[(firstOccupied + numOccupied) % buffer.length] = o;
     numOccupied++;
-    // in case any retrieves are waiting for data, wake them
-    notifyAll();
+    // wake all if inserting into empty buffer
+    if(numOccupied == 1) notifyAll();
 }
   public synchronized Object retrieve()
     throws InterruptedException
@@ -34,8 +34,8 @@ public class BoundedBuffer {
     buffer[firstOccupied] = null; // may help garbage collector
     firstOccupied = (firstOccupied + 1) % buffer.length;
     numOccupied--;
-    // in case any inserts are waiting for space, wake them
-    notifyAll();
+    // if retrieving from full buffer, notifyAll
+    if(numOccupied == buffer.length - 2) notifyAll();
     return retrieved;
   } 
 }
