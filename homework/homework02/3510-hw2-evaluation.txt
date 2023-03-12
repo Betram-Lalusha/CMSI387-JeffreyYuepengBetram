@@ -1,0 +1,86 @@
+
+
+CMSI 3510 Operating Systems
+Spring Semester 2023
+Results for Homework #2 Evaluation
+==================================
+
+Question 1 mutex reversing:          5/ 5 points
+   Perfect!
+
+Question 2 auditing code change:     5/ 5 points
+   Perfect!
+
+Question 3 test program:            18/20 points
+   Unfortunately, using JUnit for this type of testing will not actually
+   demonstrate the operation the way it should work.  While I admire that
+   you are using the testing framework, in this case the "test program"
+   should actually be a running program that reads/writes to the buffer
+   multiple times so that you can demonstrate the operation and the method
+   of synchronization.  Simply calling the methods a time or two each in
+   the 'JUnit' way doesn't show that appropriately for the test.
+
+   However, none of this was specifically spelled out in the language of
+   the problem, so most of the credit is given.
+
+Question 4 notifyall() addition:     9/10 points
+   Same comment as number 3 with the addition that what should be shown by
+   these two problems is that in the original code, the two methods read
+   and write into the buffer sort of 'at random', with the operating system
+   picking which one will run next.  There is no specific order to the read
+   and write operations.  The purpose of the modified code is to show that
+   the synchronization can be changed so that there IS an order applied when
+   the writer fills the buffer and makes the reader wait until that occurs,
+   then notifies the reader that the buffer is full so it can be emptied.
+
+   Again, not specifically stated in the problem language, so most credit is
+   provided for the work you put in on these two problems.
+
+Question 5a 2-phase locking:         4/ 5 points
+   No, it's not possible.  With two-phase locking, one transaction runs at
+      a time, so T1 will run, change both values, then T2 will run and read
+      the new values.
+
+Question 5b short read locks:        4/ 5 points
+   No, it's not possible.  With read committed isolation, the writes will
+      have exclusive locks, so T1 will have exclusive write access for the
+      duration of the transaction.  Since write locks are exclusive, in this
+      case it's the same outcome as with two-phase locking.
+
+Question 5c snapshot isolation:      4/ 5 points
+   Actually, yes, it's possible.  With snapshot isolation, the values are
+      written to DIFFERENT locations than the original storage, and then
+      later written to the original location.  If T2 reads x before that
+      update write is done, and reads y AFTER that update write is done, it
+      would have two inconsistent values, the new value for x and the old
+      value for y.
+
+Question 6 virtual address xlate:    5/ 5 points
+   Perfect!
+
+Question 7 calc. explanation:        5/ 5 points
+   Perfect!
+
+Question 8 loop 4096 analysis:      20/20 points
+   Perfect!
+
+Question 9 fork() tree:             15/15 points
+   Perfect!
+
+Total 94 out of 100 = 94.00% which is an A
+
+Comments:
+---------
+Nice work!
+
+
+===========================
+Current course evaluations:
+===========================
+
+    Homework01:  11/ 12 =  91.67% which is  9.17 points
+    Homework02:  94/100 =  94.00% which is  9.40 points
+Prelim. Design:  23/ 25 =  92.00% which is  9.20 points
+                                           -----
+                                   Total:  27.77 out of 30.00 = 92.57%
+                                             which is an A-minus
