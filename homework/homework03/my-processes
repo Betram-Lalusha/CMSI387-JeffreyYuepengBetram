@@ -1,3 +1,0 @@
-  UID   PID  PPID CPU PRI NI      VSZ    RSS WCHAN  STAT   TT       TIME COMMAND
-  501  8045  7717   0  31  0 33626760   4068 -      Ss   s000    0:00.54 /bin/zsh -il
-  501 25352  8045   0  31  0 33596836    484 -      S+   s000    0:00.01 ./file-process
