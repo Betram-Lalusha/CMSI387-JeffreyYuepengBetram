@@ -1,0 +1,1 @@
+The java implementation of the dining philosphers works by making the last philospher pick up the right fork first while the others pick up the left fork first. This way, deadlock is broken because not all of them need to acquire the left fork before the right fork.
