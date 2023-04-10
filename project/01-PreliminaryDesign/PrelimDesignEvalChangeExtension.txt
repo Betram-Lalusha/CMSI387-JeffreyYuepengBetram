@@ -1,0 +1,34 @@
+
+Preliminary Design Document
+CMSI 3510 ~ Operating Systems
+Semester Project
+Evaluation #1
+====================================
+Project: change extention command
+Type:    likely a core utility; possibly a kernel command
+
+Evaluation
+----------
+
+Good work on this submission
+
+Pretty good explanation in section 1.1 ~ clearly defined goal so that you
+   are communicating what your project will do
+
+Very good rationale in section 1.2 ~ great justification as long as you are
+   talking about changing multiple file extensions.  Single files can be
+   changed with the "mv" command already, but if you are changing extentions
+   for a list of files that is OK.  Nothing wrong with duplicating existing
+   functionality if there is a twist to it, and if you learn from it.
+
+In Section 1.3 ~ there are several modules linked to the core utility that
+   you are modifying/adding; do some research and see what they are.  You may
+   need to read through the 'Makefile' to see what is involved as well.
+
+Section 1.4 ~ you need to do a bit more research into what is involved with
+   this modification
+
+Decent job overall!
+
+An "A-minus" job on this first project deliverable ~ professional-quality
+   work!
