@@ -1,0 +1,35 @@
+
+Detailed Design Document
+CMSI 3510 ~ Operating Systems
+Semester Project
+Evaluation #2
+====================================
+Project: chown command modification to prevent '.*' modifications
+Type:    likely a core utility; possibly a kernel command
+
+Evaluation
+----------
+
+A few things missing from this submission
+
+OK, you are doing a new core utility, so there's nothing to put into section
+   2.1.  However, you didn't bother to label it.
+
+Section 2.2, you can't have "N/A" for both sections 2.1 and 2.2.  SOMETHING
+   is getting modified or added.  Although the core utilities are not a
+   'strict' part of the kernel, they are still part of Linux.  Thus, if you
+   are going to add a new core utility, THAT is the module to specify in
+   this section.  To say "N/A" on both sections would mean that you aren't
+   actually going to do ANYTHING!
+
+Section 2.3, the same logic applies here.  You are building SOMETHING, so
+   you need to have some sort of diagram showing what you are building, what
+   the parts of it are, and how it fits into the rest of Linux.  It doesn't
+   strictly HAVE to be a 'class diagram', but you need some sort of diagram
+   to show what's going on.
+
+Section 2.4 is fine.
+
+Because of the missing parts here, there is quite a bit of missing credit as
+   well.  Basically only average work.  Perhaps you didn't understand what
+   is expected for this submission, although I explained it during class.
